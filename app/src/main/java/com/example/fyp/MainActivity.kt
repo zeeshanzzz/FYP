@@ -1,9 +1,11 @@
 package com.example.fyp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.AttributeSet
 import android.view.View
 import android.widget.*
 
@@ -17,7 +19,10 @@ Handler().postDelayed(Runnable {
              startActivity(intent)
     finish();
 
-},1000
+},4000
 )
-    }
+
+
+}
+
 }
