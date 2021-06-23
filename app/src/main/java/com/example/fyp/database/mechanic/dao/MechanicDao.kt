@@ -8,8 +8,8 @@ interface MechanicDao {
     @Query("SELECT * FROM mechanic_business")
     fun getAll(): List<MechanicEnity>
 
-    @Query("SELECT * FROM mechanic_business WHERE name LIKE :title")
-    fun findByTitle(title: String): MechanicEnity
+    @Query("SELECT * FROM mechanic_business WHERE name LIKE :name")
+    fun findByTitle(name: String): MechanicEnity
 
     @Insert
     fun insertAll(vararg todo: MechanicEnity)

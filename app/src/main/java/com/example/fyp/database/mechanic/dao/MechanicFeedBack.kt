@@ -9,8 +9,8 @@ interface MechanicFeedBack {
     @Query("SELECT * FROM mechanic_feedback")
     fun getAll(): List<MechanicFeedBackEntity>
 
-    @Query("SELECT * FROM mechanic_feedback WHERE user_name LIKE :title")
-    fun findByTitle(title: String): MechanicFeedBackEntity
+    @Query("SELECT * FROM mechanic_feedback WHERE user_name LIKE :user_name")
+    fun findByTitle(user_name: String): MechanicFeedBackEntity
 
     @Insert
     fun insertAll(vararg todo: MechanicFeedBackEntity)
