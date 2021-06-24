@@ -9,8 +9,8 @@ interface UserDao {
     @Query("SELECT * FROM Users")
     fun getAll(): List<UserEntity>
 
-    @Query("SELECT * FROM Users WHERE user_name LIKE :user_name")
-    fun findByTitle(user_name: String): UserEntity
+    @Query("SELECT * FROM Users WHERE email LIKE :email")
+    fun findByEmail(email: String): UserEntity
 
     @Insert
     fun insertAll(vararg todo: UserEntity)

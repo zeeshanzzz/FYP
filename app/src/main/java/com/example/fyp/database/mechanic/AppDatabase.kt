@@ -11,22 +11,37 @@ import com.example.fyp.database.mechanic.enity.MechanicEnity
 import com.example.fyp.database.mechanic.enity.MechanicFeedBackEntity
 import com.example.fyp.database.mechanic.enity.UserEntity
 
-@Database(entities = arrayOf(MechanicEnity::class,MechanicFeedBackEntity::class, UserEntity::class), version = 1)
+@Database(entities = [MechanicEnity::class, MechanicFeedBackEntity::class, UserEntity::class], version = 1,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun mechanicDao(): MechanicDao
     abstract fun mechanicFeedbackDao(): MechanicFeedBack
     abstract fun userDao(): UserDao
     companion object {
-        @Volatile private var instance: AppDatabase? = null
-        private val LOCK = Any()
+//        @Volatile private var instance: AppDatabase? = null
+//        private val LOCK = Any()
 
-        operator fun invoke(context: Context)= instance ?: synchronized(LOCK){
-            instance ?: buildDatabase(context).also { instance = it}
+//        operator fun invoke(context: Context)= instance ?: synchronized(LOCK){
+//            instance ?: buildDatabase(context).also { instance = it}
+//        }
+private var userDB: AppDatabase? = null
+        fun getInstance(context: Context?): AppDatabase? {
+            if (null == userDB) {
+                userDB = buildDatabaseInstance(context!!)
+            }
+            return userDB
         }
+        fun buildDatabaseInstance(context: Context): AppDatabase {
+            return Room.databaseBuilder(context,
+                    AppDatabase::class.java,
+                    "FYP.db")
+                    .build()
+        }
+    }
 
-        private fun buildDatabase(context: Context) = Room.databaseBuilder(context,
-            AppDatabase::class.java, "todo-list.db")
-            .build()
+
+
+    open fun cleanUp() {
+        userDB = null
     }
 }
 

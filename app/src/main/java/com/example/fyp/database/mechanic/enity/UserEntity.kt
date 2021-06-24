@@ -9,7 +9,6 @@ data class UserEntity(
 
     @PrimaryKey(autoGenerate = true)
     var id: Int,
-    @ColumnInfo(name = "user_name") var user_name: String,
     @ColumnInfo(name = "email") var email: String,
     @ColumnInfo(name = "password") var password: String,
     @ColumnInfo(name = "mobile") var mobile: String,
