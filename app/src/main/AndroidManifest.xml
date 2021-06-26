@@ -9,18 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FYP">
+        <activity android:name=".MechanicFeedBackActivity"></activity>
+        <activity android:name=".MechanicDeleteActivity" />
+        <activity android:name=".MechanicUpdateActivity2" />
+        <activity android:name=".MehanicBusinessActivity2" />
+        <activity
+            android:name=".MechanicActivity"
+            android:label="@string/title_activity_mechanic"
+            android:theme="@style/Theme.FYP.NoActionBar" />
         <activity
             android:name=".UserActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/Theme.FYP.NoActionBar"></activity>
+            android:theme="@style/Theme.FYP.NoActionBar" />
         <activity
             android:name=".MechanicMainActivity"
             android:label="@string/title_activity_mechanic_main"
-            android:theme="@style/Theme.FYP.NoActionBar"></activity>
+            android:theme="@style/Theme.FYP.NoActionBar" />
         <activity
             android:name=".UserMainActivity"
             android:label="@string/title_activity_user_main"
-            android:theme="@style/Theme.FYP.NoActionBar"></activity>
+            android:theme="@style/Theme.FYP.NoActionBar" />
         <activity
             android:name=".AdminActivity"
             android:label="@string/title_activity_admin"
