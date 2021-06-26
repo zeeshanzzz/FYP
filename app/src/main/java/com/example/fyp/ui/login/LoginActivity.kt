@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fyp.R
-import com.example.fyp.RegistratinActivity
-import com.example.fyp.UserActivity
+import com.example.fyp.*
 import com.example.fyp.database.mechanic.AppDatabase
 import com.example.fyp.database.mechanic.enity.UserEntity
 import com.google.android.material.textfield.TextInputLayout
@@ -55,8 +53,10 @@ class LoginActivity : AppCompatActivity() {
                         LoginTask(this@LoginActivity,tempname).execute()
                     }
                     R.id.radioMechanic -> {
+                        LoginTask(this@LoginActivity,tempname).execute()
                     }
                     R.id.radioAdmin -> {
+                        LoginTask(this@LoginActivity,tempname).execute()
                     }
                 }
             }
@@ -65,18 +65,29 @@ class LoginActivity : AppCompatActivity() {
     }
 
     @SuppressLint("StaticFieldLeak")
-    inner  class LoginTask internal constructor(context: LoginActivity?,email:String) : AsyncTask<Void?, Void?, Boolean>() {
+    inner  class LoginTask internal constructor(context: LoginActivity?,email:String) : AsyncTask<Void?, Void?, String>() {
         private val activityReference: WeakReference<LoginActivity>
        // private lateinit var note: UserEntity
         private lateinit var email:String
 
 
         // onPostExecute runs on main thread
-        override fun onPostExecute(bool: Boolean) {
-            if (bool) {
-                val intent = Intent(activityReference.get(), UserActivity::class.java)
-                activityReference.get()?.startActivity(intent)
+        override fun onPostExecute(bool: String) {
+            when(bool){
+                UserType.Admin.name->{
+                    val intent = Intent(activityReference.get(), AdminActivity::class.java)
+                    activityReference.get()?.startActivity(intent)
+                }
+                UserType.User.name->{
+                    val intent = Intent(activityReference.get(), UserActivity::class.java)
+                    activityReference.get()?.startActivity(intent)
+                }
+                UserType.Mechanic.name->{
+                    val intent = Intent(activityReference.get(), MechanicActivity::class.java)
+                    activityReference.get()?.startActivity(intent)
+                }
             }
+
         }
         init {
             activityReference= WeakReference(context)
@@ -84,16 +95,16 @@ class LoginActivity : AppCompatActivity() {
             this.email=email
         }
 
-        override fun doInBackground(vararg params: Void?): Boolean {
-            var isUserExist: Boolean=false;
+        override fun doInBackground(vararg params: Void?): String {
+            var isUserExist:String=""
             try {
          val  entity: UserEntity? =  activityReference.get()?.appDatabase?.userDao()?.findByEmail(email)
                 if(!entity?.email.isNullOrEmpty()) {
-                    isUserExist = true;
+                  isUserExist= entity?.userType!!
                 }
 
             }catch (e: Exception){
-                isUserExist=false;
+
 
             }
             return isUserExist;

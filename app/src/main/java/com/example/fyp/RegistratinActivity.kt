@@ -48,10 +48,12 @@ class RegistratinActivity : AppCompatActivity() {
                         InsertTask(this@RegistratinActivity,entity).execute()
                     }
                     R.id.radioMechanic -> {
+                        val entity= UserEntity(0, tempname,temppassword,tempMobile,temptvCity,UserType.valueOf("Admin").toString());
+                        InsertTask(this@RegistratinActivity,entity).execute()
                     }
                     R.id.radioAdmin -> {
-                        val intent = Intent(this@RegistratinActivity, AdminActivity::class.java)
-                        startActivity(intent)
+                        val entity= UserEntity(0, tempname,temppassword,tempMobile,temptvCity,UserType.valueOf("Mechanic").toString());
+                        InsertTask(this@RegistratinActivity,entity).execute()
                     }
                 }
             }
@@ -68,8 +70,21 @@ class RegistratinActivity : AppCompatActivity() {
         // onPostExecute runs on main thread
         override fun onPostExecute(bool: Boolean) {
             if (bool) {
-                val intent = Intent(activityReference.get(), UserActivity::class.java)
-                activityReference.get()?.startActivity(intent)
+
+                when (radioUserButton.id) {
+                    R.id.radioUser -> {
+                        val intent = Intent(activityReference.get(), UserActivity::class.java)
+                        activityReference.get()?.startActivity(intent)
+                    }
+                    R.id.radioMechanic -> {
+                        val intent = Intent(activityReference.get(), MechanicActivity::class.java)
+                        activityReference.get()?.startActivity(intent)
+                    }
+                    R.id.radioAdmin -> {
+                        val intent = Intent(activityReference.get(), AdminActivity::class.java)
+                        activityReference.get()?.startActivity(intent)
+                    }
+                }
             }
         }
         init {
