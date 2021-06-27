@@ -15,15 +15,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-Handler().postDelayed(Runnable {
-               val intent:Intent=Intent(this,LoginActivity::class.java)
-             startActivity(intent)
-    finish();
+        Handler().postDelayed(
+            Runnable {
+                val intent: Intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish();
 
-},4000
-)
+            }, 4000
+        )
 
 
-}
+    }
 
 }
