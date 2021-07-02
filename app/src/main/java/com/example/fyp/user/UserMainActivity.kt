@@ -3,6 +3,7 @@ package com.example.fyp.user
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.fyp.R
@@ -27,9 +28,10 @@ class UserMainActivity : AppCompatActivity() {
     private fun init() {
 
         tv_userMainHome = findViewById(R.id.tv_userMainHome);
+        tv_userMainHome.visibility=View.GONE
         tv_userMainLogOut = findViewById(R.id.tv_userMainLogOut);
 
-        btn_userFindService = findViewById(R.id.tv_userMainHome);
+        btn_userFindService = findViewById(R.id.btn_userFindService);
         btn_userMyProfile = findViewById(R.id.btn_userMyProfile);
         btn_userFeedback = findViewById(R.id.btn_userFeedback);
     }

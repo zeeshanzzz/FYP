@@ -2,6 +2,7 @@ package com.example.fyp.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import com.example.fyp.R
@@ -19,7 +20,7 @@ class PostFeedbackActivity : AppCompatActivity() {
 
     private lateinit var et_userProfileUserFeedback:EditText
 
-    private lateinit var btn_submit:EditText
+    private lateinit var btn_submit:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class PostFeedbackActivity : AppCompatActivity() {
 
     private fun init(){
 
-        iv_userFeedbackBack=findViewById(R.id.iv_userProfileBack)
+        iv_userFeedbackBack=findViewById(R.id.iv_userFeedbackBack)
 
         et_userProfileUserId=findViewById(R.id.et_userProfileUserId)
 

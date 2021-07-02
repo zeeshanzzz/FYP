@@ -27,7 +27,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:hint="Mechanic Name"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Email"
                 android:layout_gravity="center"
@@ -49,7 +49,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:hint="City"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:hint="Address"
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
@@ -70,7 +70,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:textColor="@color/black"/>
             <Button

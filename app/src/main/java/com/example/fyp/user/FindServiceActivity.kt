@@ -2,6 +2,7 @@ package com.example.fyp.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -17,7 +18,7 @@ class FindServiceActivity : AppCompatActivity() {
 
     private lateinit var rc_userFindService: RecyclerView
 
-    private lateinit var sv_findService: SearchView
+    private lateinit var sv_findService: androidx.appcompat.widget.SearchView
 
     private lateinit var serviceList: ArrayList<UserFindServiceModal>
 
@@ -28,6 +29,7 @@ class FindServiceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_find_service)
 
         init()
+        listener()
         showServicesList()
     }
 
@@ -36,14 +38,15 @@ class FindServiceActivity : AppCompatActivity() {
         iv_userFindServiceBack = findViewById(R.id.iv_userFindServiceBack)
         rc_userFindService = findViewById(R.id.rc_userFindService)
         sv_findService = findViewById(R.id.sv_findService)
+        sv_findService.visibility= View.GONE
 
+        serviceList= ArrayList<UserFindServiceModal>()
         servicesAdapter = UserFindServiceAdapter()
 
     }
 
     private fun listener() {
-
-
+        iv_userFindServiceBack.setOnClickListener { onBackPressed() }
     }
 
     private fun getServicesList() {

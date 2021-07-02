@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp.*
 import com.example.fyp.database.mechanic.AppDatabase
 import com.example.fyp.database.mechanic.enity.UserEntity
+import com.example.fyp.user.UserMainActivity
 import com.google.android.material.textfield.TextInputLayout
 import java.lang.Exception
 import java.lang.ref.WeakReference
@@ -95,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 }
                 UserType.User.name -> {
-                    val intent = Intent(activityReference.get(), UserActivity::class.java)
+                    val intent = Intent(activityReference.get(), UserMainActivity::class.java)
                     activityReference.get()?.startActivity(intent)
                     finish()
                 }
