@@ -47,7 +47,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password" />
+            android:hint="Password"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +73,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confrim Password" />
+            android:hint="Confrim Password"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +99,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mobile" />
+            android:hint="Mobile"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tvCity"
@@ -126,8 +129,8 @@
 
     <Button
         android:id="@+id/loginRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
@@ -136,9 +139,9 @@
         android:clickable="true"
         android:enabled="true"
         android:text="Registration"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="@color/white"
         android:textStyle="bold"
+        android:textAllCaps="false"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

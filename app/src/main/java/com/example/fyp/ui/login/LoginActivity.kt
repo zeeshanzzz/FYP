@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
-        appDatabase= AppDatabase.getInstance(this@LoginActivity)!!
+        appDatabase = AppDatabase.getInstance(this@LoginActivity)!!
 
         val username = findViewById<TextInputLayout>(R.id.username)
         val password = findViewById<TextInputLayout>(R.id.password)
@@ -32,9 +33,9 @@ class LoginActivity : AppCompatActivity() {
         val loading = findViewById<ProgressBar>(R.id.loading)
         val radioUserGroup = findViewById<RadioGroup>(R.id.radioGroup)
         val tvSignUp = findViewById<TextView>(R.id.tvSignUp)
-        tvSignUp.setOnClickListener(object :View.OnClickListener{
+        tvSignUp.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-           val intent=Intent(this@LoginActivity,RegistratinActivity::class.java)
+                val intent = Intent(this@LoginActivity, RegistratinActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -44,20 +45,32 @@ class LoginActivity : AppCompatActivity() {
         login.setOnClickListener(object : View.OnClickListener {
 
             override fun onClick(v: View?) {
-                val temppassword=password.editText?.text.toString()
-                val tempname=username.editText?.text.toString()
-                val selectedId: Int = radioUserGroup.getCheckedRadioButtonId()
-                radioUserButton = findViewById<View>(selectedId) as RadioButton
-                when (radioUserButton.id) {
-                    R.id.radioUser -> {
-                        LoginTask(this@LoginActivity,tempname).execute()
+                try {
+                    val temppassword = password.editText?.text.toString()
+                    val tempname = username.editText?.text.toString()
+                    val selectedId: Int = radioUserGroup.getCheckedRadioButtonId()
+                    radioUserButton = findViewById<View>(selectedId) as RadioButton
+                    if (tempname.isEmpty()) {
+                        username.editText?.error = "Required"
+                        return
                     }
-                    R.id.radioMechanic -> {
-                        LoginTask(this@LoginActivity,tempname).execute()
+                    if (temppassword.isEmpty()) {
+                        password.editText?.error = "Required"
+                        return
                     }
-                    R.id.radioAdmin -> {
-                        LoginTask(this@LoginActivity,tempname).execute()
+                    when (radioUserButton.id) {
+                        R.id.radioUser -> {
+                            LoginTask(this@LoginActivity, tempname).execute()
+                        }
+                        R.id.radioMechanic -> {
+                            LoginTask(this@LoginActivity, tempname).execute()
+                        }
+                        R.id.radioAdmin -> {
+                            LoginTask(this@LoginActivity, tempname).execute()
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.e("App", "Error " + e.message.toString())
                 }
             }
 
@@ -65,45 +78,57 @@ class LoginActivity : AppCompatActivity() {
     }
 
     @SuppressLint("StaticFieldLeak")
-    inner  class LoginTask internal constructor(context: LoginActivity?,email:String) : AsyncTask<Void?, Void?, String>() {
+    inner class LoginTask internal constructor(context: LoginActivity?, email: String) :
+        AsyncTask<Void?, Void?, String>() {
         private val activityReference: WeakReference<LoginActivity>
-       // private lateinit var note: UserEntity
-        private lateinit var email:String
+
+        // private lateinit var note: UserEntity
+        private lateinit var email: String
 
 
         // onPostExecute runs on main thread
         override fun onPostExecute(bool: String) {
-            when(bool){
-                UserType.Admin.name->{
+            when (bool) {
+                UserType.Admin.name -> {
                     val intent = Intent(activityReference.get(), AdminActivity::class.java)
                     activityReference.get()?.startActivity(intent)
+                    finish()
                 }
-                UserType.User.name->{
+                UserType.User.name -> {
                     val intent = Intent(activityReference.get(), UserActivity::class.java)
                     activityReference.get()?.startActivity(intent)
+                    finish()
                 }
-                UserType.Mechanic.name->{
+                UserType.Mechanic.name -> {
                     val intent = Intent(activityReference.get(), MechanicActivity::class.java)
                     activityReference.get()?.startActivity(intent)
+                    finish()
+                }
+                UserType.NoUser.name->{
+                    Toast.makeText(this@LoginActivity,"No User Found ",Toast.LENGTH_SHORT).show()
                 }
             }
 
         }
+
         init {
-            activityReference= WeakReference(context)
-           // this.note =note
-            this.email=email
+            activityReference = WeakReference(context)
+            // this.note =note
+            this.email = email
         }
 
         override fun doInBackground(vararg params: Void?): String {
-            var isUserExist:String=""
+            var isUserExist: String = ""
             try {
-         val  entity: UserEntity? =  activityReference.get()?.appDatabase?.userDao()?.findByEmail(email)
-                if(!entity?.email.isNullOrEmpty()) {
-                  isUserExist= entity?.userType!!
+                val entity: UserEntity? =
+                    activityReference.get()?.appDatabase?.userDao()?.findByEmail(email)
+                if (!entity?.email.isNullOrEmpty()) {
+                    isUserExist = entity?.userType!!
+                }else{
+                    isUserExist= UserType.NoUser.name
                 }
 
-            }catch (e: Exception){
+            } catch (e: Exception) {
 
 
             }
@@ -113,8 +138,4 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
-
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
 

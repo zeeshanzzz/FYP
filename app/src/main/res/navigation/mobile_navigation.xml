@@ -22,4 +22,9 @@
         android:name="com.example.fyp.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_feedback"
+        android:name="com.example.fyp.ui.UserFeedBack.UserFeedbackFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/activity_view_user_feedback" />
 </navigation>

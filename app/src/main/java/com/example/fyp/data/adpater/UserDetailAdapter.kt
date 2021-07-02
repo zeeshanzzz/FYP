@@ -30,9 +30,9 @@ class UserDetailAdapter :RecyclerView.Adapter<UserDetailAdapter.UserDetailAdapte
 
             var listItem = userDetailList.get(position)
 
-            holder.tv_userDetailName.text = listItem.name
-            holder.tv_userDetailNumber.text = listItem.mobileNumber
-            holder.tv_userDetailCity.text = listItem.city
+            holder.tv_userDetailName.text = "Name "+listItem.name
+            holder.tv_userDetailNumber.text = "Mobile # "+listItem.mobileNumber
+            holder.tv_userDetailCity.text = "City "+listItem.city
 
         } catch (e: Exception) {
             Log.e("FYP APP ======>", "Error " + e.message)

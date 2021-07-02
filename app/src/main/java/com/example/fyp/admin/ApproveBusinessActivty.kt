@@ -35,6 +35,7 @@ class ApproveBusinessActivty : AppCompatActivity() {
         sv_adminApproveBusiness = findViewById(R.id.sv_adminApproveBusiness)
         rc_adminApproveBusiness = findViewById(R.id.rc_adminApproveBusiness)
 
+        businessList=ArrayList<ApproveBusiness>()
         businessAdapter= ApproveBusinessListAdapter()
 
         getBusinessList()

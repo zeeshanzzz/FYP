@@ -1,16 +1,21 @@
-package com.example.fyp.admin
+package com.example.fyp.ui.UserFeedBack
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.R
 import com.example.fyp.data.adpater.ViewUserFeedbackAdapter
 import com.example.fyp.data.model.ViewUserFeedBack
 
-class ViewUserFeedbackActivity : AppCompatActivity() {
+
+class UserFeedbackFragment : Fragment() {
+
+    private lateinit var root:View
 
     private lateinit var iv_viewUserFeedBack: ImageView
 
@@ -23,17 +28,25 @@ class ViewUserFeedbackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_user_feedback)
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        root=inflater.inflate(R.layout.activity_view_user_feedback, container, false)
         init()
-        listener()
+        return root
     }
 
     private fun init(){
 
-        iv_viewUserFeedBack = findViewById(R.id.iv_viewUserFeedBack)
-        sv_viewUserFeedBack = findViewById(R.id.sv_viewUserFeedBack)
-        rc_viewUserFeedback = findViewById(R.id.rc_viewUserFeedback)
+        iv_viewUserFeedBack = root.findViewById(R.id.iv_viewUserFeedBack)
+        sv_viewUserFeedBack = root.findViewById(R.id.sv_viewUserFeedBack)
+        rc_viewUserFeedback = root.findViewById(R.id.rc_viewUserFeedback)
+
+        sv_viewUserFeedBack.visibility=View.GONE
 
         feedList=ArrayList<ViewUserFeedBack>()
         feedbackAdapter=  ViewUserFeedbackAdapter()
@@ -55,16 +68,16 @@ class ViewUserFeedbackActivity : AppCompatActivity() {
         feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
         feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
 
-       if (feedList.isEmpty().not()){
-           feedbackAdapter= ViewUserFeedbackAdapter()
-           feedbackAdapter.setFeedbackList(feedList)
-           showFeedbackList()
-       }
+        if (feedList.isEmpty().not()){
+            feedbackAdapter= ViewUserFeedbackAdapter()
+            feedbackAdapter.setFeedbackList(feedList)
+            showFeedbackList()
+        }
     }
 
     private fun showFeedbackList(){
         rc_viewUserFeedback.layoutManager = LinearLayoutManager(
-            this@ViewUserFeedbackActivity,
+            requireContext(),
             LinearLayoutManager.VERTICAL,
             false
         )
@@ -75,8 +88,9 @@ class ViewUserFeedbackActivity : AppCompatActivity() {
 
     private fun listener(){
 
-        iv_viewUserFeedBack.setOnClickListener {
+        /*iv_viewUserFeedBack.setOnClickListener {
             onBackPressed()
-        }
+        }*/
     }
+
 }
