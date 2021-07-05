@@ -269,14 +269,14 @@ class FindServiceActivity : AppCompatActivity() {
 //    }
     @SuppressLint("StaticFieldLeak")
     inner class UserDetailsTask internal constructor(context: FindServiceActivity?) :
-        AsyncTask<Void?, Void?, List<UserEntity>>() {
+        AsyncTask<Void?, Void?, MechanicEnity>() {
         private val activityReference: WeakReference<FindServiceActivity>
 
         // private lateinit var note: UserEntity
         private lateinit var email: String
 
 
-        override fun onPostExecute(result: List<UserEntity>?) {
+        override fun onPostExecute(result: MechanicEnity?) {
             super.onPostExecute(result)
 //            if (result?.isEmpty()!!.not()) {
 //                userDetailAdapter.setUserDetail(result)
@@ -291,7 +291,7 @@ class FindServiceActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: Void?): MechanicEnity {
-            var  entity: MechanicEnity=MechanicEnity(0,"","","","","","","")
+            var  entity: MechanicEnity= MechanicEnity(0,"","","","","","","")
             try {
                 entity= activityReference.get()?.appDatabase?.mechanicDao()?.findByTitle(email)!!
 
