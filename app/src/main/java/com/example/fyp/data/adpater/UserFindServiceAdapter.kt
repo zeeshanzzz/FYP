@@ -13,12 +13,13 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.R
 import com.example.fyp.data.model.UserFindServiceModal
+import com.example.fyp.database.mechanic.enity.MechanicEnity
 
 
 class UserFindServiceAdapter :
     RecyclerView.Adapter<UserFindServiceAdapter.UserFindServiceAdapterViewHolder>() {
 
-    private lateinit var userFindServiceList: ArrayList<UserFindServiceModal>
+    private lateinit var userFindServiceList: ArrayList<MechanicEnity>
 
 
     override fun onCreateViewHolder(
@@ -36,16 +37,16 @@ class UserFindServiceAdapter :
 
             var listItem = userFindServiceList.get(position)
 
-            holder.tv_itemMechenicName.text = listItem.mechenicName
+            holder.tv_itemMechenicName.text = listItem.name
             holder.tv_itemEmail.text = listItem.email
-            holder.tv_itemWorkType.text = listItem.workType
+            holder.tv_itemWorkType.text = listItem.worktype
             holder.tv_itemCity.text = listItem.city
             holder.tv_itemAddress.text = listItem.address
 
             holder.btn_userFindServiceCall.setOnClickListener {
 
                 val callIntent = Intent(Intent.ACTION_CALL)
-                callIntent.data = Uri.parse("tel:${listItem.phoneNumber}")
+                callIntent.data = Uri.parse("tel:${listItem.address}")
                 holder.itemView.context.startActivity(callIntent)
 
                 //Toast.makeText(holder.itemView.context, "Call Button Clicked", Toast.LENGTH_LONG).show()
@@ -60,7 +61,7 @@ class UserFindServiceAdapter :
         return userFindServiceList.size
     }
 
-    public fun setUserServiceList(servicesList: ArrayList<UserFindServiceModal>) {
+    public fun setUserServiceList(servicesList: ArrayList<MechanicEnity>) {
         this.userFindServiceList = servicesList
     }
 
