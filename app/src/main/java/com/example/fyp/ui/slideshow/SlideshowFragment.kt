@@ -57,6 +57,7 @@ class SlideshowFragment : Fragment() ,ItemClickListner {
 
         businessList=ArrayList<ApproveBusiness>()
         businessAdapter= ApproveBusinessListAdapter()
+        businessAdapter.setItemClickListner(this)
 
         getBusinessList()
     }

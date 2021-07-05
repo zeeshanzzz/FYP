@@ -17,13 +17,15 @@ import com.example.fyp.R
 import com.example.fyp.RegistratinActivity
 import com.example.fyp.data.adpater.UserFindServiceAdapter
 import com.example.fyp.data.model.UserFindServiceModal
+import com.example.fyp.database.mechanic.AppDatabase
+import com.example.fyp.database.mechanic.enity.MechanicEnity
 import com.example.fyp.database.mechanic.enity.UserEntity
 import java.lang.ref.WeakReference
 
 class FindServiceActivity : AppCompatActivity() {
 
     private lateinit var iv_userFindServiceBack: ImageView
-
+    lateinit var appDatabase: AppDatabase;
     private lateinit var rc_userFindService: RecyclerView
 
     private lateinit var sv_findService: androidx.appcompat.widget.SearchView
@@ -35,6 +37,7 @@ class FindServiceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_service)
+        appDatabase = AppDatabase.getInstance(this@FindServiceActivity)!!
 
         init()
         listener()
@@ -264,4 +267,45 @@ class FindServiceActivity : AppCompatActivity() {
 //        }
 //
 //    }
+    @SuppressLint("StaticFieldLeak")
+    inner class UserDetailsTask internal constructor(context: FindServiceActivity?) :
+        AsyncTask<Void?, Void?, List<UserEntity>>() {
+        private val activityReference: WeakReference<FindServiceActivity>
+
+        // private lateinit var note: UserEntity
+        private lateinit var email: String
+
+
+        override fun onPostExecute(result: List<UserEntity>?) {
+            super.onPostExecute(result)
+//            if (result?.isEmpty()!!.not()) {
+//                userDetailAdapter.setUserDetail(result)
+//                showUserDetailList()
+//            }
+        }
+
+        init {
+            activityReference = WeakReference(context)
+            // this.note =note
+            this.email = email
+        }
+
+        override fun doInBackground(vararg params: Void?): MechanicEnity {
+            var  entity: MechanicEnity=MechanicEnity(0,"","","","","","","")
+            try {
+                entity= activityReference.get()?.appDatabase?.mechanicDao()?.findByTitle(email)!!
+
+
+            } catch (e: java.lang.Exception) {
+
+
+
+            }
+            finally {
+                return entity;
+            }
+
+        }
+
+    }
 }

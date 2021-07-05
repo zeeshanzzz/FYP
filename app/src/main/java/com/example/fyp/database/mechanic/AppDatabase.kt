@@ -11,7 +11,7 @@ import com.example.fyp.database.mechanic.enity.MechanicEnity
 import com.example.fyp.database.mechanic.enity.MechanicFeedBackEntity
 import com.example.fyp.database.mechanic.enity.UserEntity
 
-@Database(entities = [MechanicEnity::class, MechanicFeedBackEntity::class, UserEntity::class], version = 1,exportSchema = false)
+@Database(entities = [MechanicEnity::class, MechanicFeedBackEntity::class, UserEntity::class], version = 2,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun mechanicDao(): MechanicDao
     abstract fun mechanicFeedbackDao(): MechanicFeedBack
@@ -34,6 +34,7 @@ private var userDB: AppDatabase? = null
             return Room.databaseBuilder(context,
                     AppDatabase::class.java,
                     "FYP.db")
+                .fallbackToDestructiveMigration()
                     .build()
         }
     }

@@ -112,7 +112,7 @@ itemClickListner.onItemClick(holder.sp_approveBusinessStatus.selectedItem.toStri
     private fun updateBusinessStatus( id:String, status:String) {
 
     }
-    private fun setItemClickListner(itemClickListner:ItemClickListner){
+     fun setItemClickListner(itemClickListner:ItemClickListner){
         this.itemClickListner=itemClickListner
     }
 //    @SuppressLint("StaticFieldLeak")

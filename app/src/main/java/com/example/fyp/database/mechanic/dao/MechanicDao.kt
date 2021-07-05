@@ -8,8 +8,8 @@ interface MechanicDao {
     @Query("SELECT * FROM mechanic_business")
     fun getAll(): List<MechanicEnity>
 
-    @Query("SELECT * FROM mechanic_business WHERE name LIKE :name")
-    fun findByTitle(name: String): MechanicEnity
+    @Query("SELECT * FROM mechanic_business WHERE approve_status LIKE :approve_status")
+    fun findByTitle(approve_status: String): MechanicEnity
 
     @Insert
     fun insertAll(vararg todo: MechanicEnity)
@@ -20,6 +20,6 @@ interface MechanicDao {
     @Update
     fun updateTodo(vararg todos: MechanicEnity)
 
-    @Query("UPDATE mechanic_business SET approve_status=:approve_status WHERE name = :name")
-    fun update(approve_status: String, name: String)
+    @Query("UPDATE mechanic_business SET approve_status=:approve_status WHERE email = :email")
+    fun update(approve_status: String, email: String)
 }
