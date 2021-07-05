@@ -1,5 +1,7 @@
 package com.example.fyp.data.adpater
 
+import android.annotation.SuppressLint
+import android.os.AsyncTask
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,19 +12,23 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp.AdminActivity
 import com.example.fyp.R
 import com.example.fyp.data.model.ApproveBusiness
+import com.example.fyp.database.mechanic.enity.MechanicEnity
+import java.lang.ref.WeakReference
 
 
 class ApproveBusinessListAdapter :
     RecyclerView.Adapter<ApproveBusinessListAdapter.ApproveBusinessListAdapterViewHolder>() {
+    private  lateinit var itemClickListner:ItemClickListner
 
-    private lateinit var businessList: ArrayList<ApproveBusiness>
+    private lateinit var businessList: ArrayList<MechanicEnity>
 
     private val SELECT_STATUS: String = "Select Status"
 
-    public fun setBusinessList(businessList: ArrayList<ApproveBusiness>) {
-        this.businessList = businessList
+    public fun setBusinessList(businessList: ArrayList<MechanicEnity>) {
+        this.businessList = businessList as ArrayList<MechanicEnity>
     }
 
 
@@ -65,8 +71,8 @@ class ApproveBusinessListAdapter :
 
             holder.tv_approveBusinessAddress.text = listItem.address
             holder.tv_approveBusinessMechenicName.text = listItem.name
-            holder.tv_approveBusinessWorkType.text = listItem.workType
-            holder.tv_approveBusinessLiscense.text = listItem.license_no
+            holder.tv_approveBusinessWorkType.text = listItem.worktype
+            holder.tv_approveBusinessLiscense.text = listItem.license
             holder.tv_approveBusinessEmail.text = listItem.email
             holder.tv_approveBusinessCity.text = listItem.city
 
@@ -93,7 +99,8 @@ class ApproveBusinessListAdapter :
 
 
             holder.btn_approveBusinessSave.setOnClickListener {
-                updateBusinessStatus(listItem.city,holder.sp_approveBusinessStatus.selectedItem.toString())
+itemClickListner.onItemClick(holder.sp_approveBusinessStatus.selectedItem.toString(),holder.tv_approveBusinessEmail.text.toString())
+                //updateBusinessStatus(listItem.city,holder.sp_approveBusinessStatus.selectedItem.toString())
             }
 
         } catch (e: Exception) {
@@ -105,4 +112,49 @@ class ApproveBusinessListAdapter :
     private fun updateBusinessStatus( id:String, status:String) {
 
     }
+    private fun setItemClickListner(itemClickListner:ItemClickListner){
+        this.itemClickListner=itemClickListner
+    }
+//    @SuppressLint("StaticFieldLeak")
+//    inner class UserDetailsTask internal constructor(context: ApproveBusinessListAdapter?) :
+//        AsyncTask<Void?, Void?, List<MechanicEnity>>() {
+//        private val activityReference: WeakReference<ApproveBusinessListAdapter>
+//
+//        // private lateinit var note: UserEntity
+//        // private lateinit var email: String
+//
+//
+//        override fun onPostExecute(result: List<MechanicEnity>?) {
+//            super.onPostExecute(result)
+//
+//        }
+//
+//        init {
+//            activityReference = WeakReference(context)
+//            // this.note =note
+//            // this.email = email
+//        }
+//
+//        override fun doInBackground(vararg params: Void?): List<MechanicEnity> {
+//            var  entity: List<MechanicEnity> = ArrayList()
+//            try {
+//                entity= activityReference.get()?.appDatabase?.mechanicDao()?.getAll()!!
+//
+//
+//            } catch (e: java.lang.Exception) {
+//
+//
+//
+//            }
+//            finally {
+//                return entity;
+//            }
+//
+//        }
+//
+//    }
+//
+}
+interface ItemClickListner{
+    fun onItemClick(item:String,mail:String)
 }

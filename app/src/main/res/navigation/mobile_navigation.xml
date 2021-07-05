@@ -14,17 +14,17 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.fyp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="User Details"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.fyp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="Approve Business"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/nav_feedback"
         android:name="com.example.fyp.ui.UserFeedBack.UserFeedbackFragment"
-        android:label="@string/menu_slideshow"
+        android:label="FeedBack"
         tools:layout="@layout/activity_view_user_feedback" />
 </navigation>

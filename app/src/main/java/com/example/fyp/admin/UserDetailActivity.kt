@@ -51,10 +51,10 @@ class UserDetailActivity : AppCompatActivity() {
         userDetailList.add(UserDetail("7", "Test", "03241234567", "Lahore"))
         userDetailList.add(UserDetail("8", "Test", "03241234567", "Lahore"))
 
-        if (userDetailList.isEmpty().not()) {
-            userDetailAdapter.setUserDetail(userDetailList)
-            showUserDetailList()
-        }
+//        if (userDetailList.isEmpty().not()) {
+//            userDetailAdapter.setUserDetail(userDetailList)
+//            showUserDetailList()
+//        }
     }
 
     private fun showUserDetailList() {

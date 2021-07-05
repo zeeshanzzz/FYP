@@ -1,7 +1,5 @@
 package com.example.fyp.data.adpater
 
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.R
-import com.example.fyp.data.model.UserDetail
-import com.example.fyp.data.model.UserFindServiceModal
+import com.example.fyp.database.mechanic.enity.UserEntity
 
 class UserDetailAdapter :RecyclerView.Adapter<UserDetailAdapter.UserDetailAdapterViewHolder>(){
 
 
-    private lateinit var userDetailList: ArrayList<UserDetail>
+    private lateinit var userDetailList: ArrayList<UserEntity>
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserDetailAdapterViewHolder {
@@ -30,8 +27,8 @@ class UserDetailAdapter :RecyclerView.Adapter<UserDetailAdapter.UserDetailAdapte
 
             var listItem = userDetailList.get(position)
 
-            holder.tv_userDetailName.text = "Name "+listItem.name
-            holder.tv_userDetailNumber.text = "Mobile # "+listItem.mobileNumber
+            holder.tv_userDetailName.text = "Name "+listItem.email
+            holder.tv_userDetailNumber.text = "Mobile # "+listItem.mobile
             holder.tv_userDetailCity.text = "City "+listItem.city
 
         } catch (e: Exception) {
@@ -43,8 +40,8 @@ class UserDetailAdapter :RecyclerView.Adapter<UserDetailAdapter.UserDetailAdapte
         return userDetailList.size
     }
 
-    public fun setUserDetail(userDetailList: ArrayList<UserDetail>){
-        this.userDetailList=userDetailList
+    public fun setUserDetail(userDetailList: List<UserEntity>?){
+        this.userDetailList= userDetailList as ArrayList<UserEntity>
     }
 
     inner class UserDetailAdapterViewHolder constructor(itemView: View) :

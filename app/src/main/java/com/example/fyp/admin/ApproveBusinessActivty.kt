@@ -54,7 +54,7 @@ class ApproveBusinessActivty : AppCompatActivity() {
         businessList.add(ApproveBusiness("9","Test","test@gmail.com","Type one","Lahore","Johar Town","1234567",""))
 
         if (businessList.isEmpty().not()) {
-            businessAdapter.setBusinessList(businessList)
+         //   businessAdapter.setBusinessList(businessList)
             showBusinessList()
         }
     }

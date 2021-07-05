@@ -19,4 +19,7 @@ interface MechanicDao {
 
     @Update
     fun updateTodo(vararg todos: MechanicEnity)
+
+    @Query("UPDATE mechanic_business SET approve_status=:approve_status WHERE name = :name")
+    fun update(approve_status: String, name: String)
 }

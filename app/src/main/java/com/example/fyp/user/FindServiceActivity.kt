@@ -1,5 +1,8 @@
 package com.example.fyp.user
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,9 +11,14 @@ import android.widget.SearchView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp.AdminActivity
+import com.example.fyp.MechanicActivity
 import com.example.fyp.R
+import com.example.fyp.RegistratinActivity
 import com.example.fyp.data.adpater.UserFindServiceAdapter
 import com.example.fyp.data.model.UserFindServiceModal
+import com.example.fyp.database.mechanic.enity.UserEntity
+import java.lang.ref.WeakReference
 
 class FindServiceActivity : AppCompatActivity() {
 
@@ -209,4 +217,51 @@ class FindServiceActivity : AppCompatActivity() {
         }
 
     }
+    //@SuppressLint("StaticFieldLeak")
+//    inner class InsertTask internal constructor(context: FindServiceActivity?, note: UserEntity) :
+//        AsyncTask<Void?, Void?, Boolean>() {
+//        private val activityReference: WeakReference<FindServiceActivity>
+//        private lateinit var note: UserEntity
+//
+//
+//        // onPostExecute runs on main thread
+//        override fun onPostExecute(bool: Boolean) {
+//            if (bool) {
+//
+//                when (radioUserButton.id) {
+//                    R.id.radioUser -> {
+//                        val intent = Intent(activityReference.get(), UserMainActivity::class.java)
+//                        activityReference.get()?.startActivity(intent)
+//                    }
+//                    R.id.radioMechanic -> {
+//                        val intent = Intent(activityReference.get(), MechanicActivity::class.java)
+//                        activityReference.get()?.startActivity(intent)
+//                    }
+//                    R.id.radioAdmin -> {
+//                        val intent = Intent(activityReference.get(), AdminActivity::class.java)
+//                        activityReference.get()?.startActivity(intent)
+//                    }
+//                }
+//            }
+//        }
+//
+//        init {
+//            activityReference = WeakReference(context)
+//            this.note = note
+//        }
+//
+//        override fun doInBackground(vararg params: Void?): Boolean {
+//            var isInserted: Boolean;
+//            try {
+//                activityReference.get()?.appDatabase?.userDao()?.insertAll(note);
+//                isInserted = true;
+//
+//            } catch (e: Exception) {
+//                isInserted = false;
+//
+//            }
+//            return isInserted;
+//        }
+//
+//    }
 }

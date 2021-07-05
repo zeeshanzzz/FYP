@@ -13,6 +13,7 @@ data class MechanicEnity(
     @ColumnInfo(name = "worktype") var worktype: String,
     @ColumnInfo(name = "city") var city: String,
     @ColumnInfo(name = "address") var address: String,
-    @ColumnInfo(name = "license") var license: String
+    @ColumnInfo(name = "license") var license: String,
+    @ColumnInfo(name = "approve_status") var approve_status: String
 
 )

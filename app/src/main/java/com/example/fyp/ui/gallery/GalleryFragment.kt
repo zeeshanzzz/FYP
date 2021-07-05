@@ -1,27 +1,27 @@
 package com.example.fyp.ui.gallery
 
-import android.content.Intent
+import android.annotation.SuppressLint
+import android.os.AsyncTask
 import android.os.Bundle
-import android.service.media.MediaBrowserService
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp.AdminActivity
 import com.example.fyp.R
-import com.example.fyp.admin.UserDetailActivity
+import com.example.fyp.UserType
 import com.example.fyp.data.adpater.UserDetailAdapter
 import com.example.fyp.data.model.UserDetail
+import com.example.fyp.database.mechanic.AppDatabase
+import com.example.fyp.database.mechanic.enity.UserEntity
+import java.lang.ref.WeakReference
 
 class GalleryFragment : Fragment() {
-
+    lateinit var appDatabase: AppDatabase;
     private lateinit var galleryViewModel: GalleryViewModel
 
     private lateinit var iv_userDetailBack: ImageView
@@ -51,6 +51,7 @@ class GalleryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appDatabase = AppDatabase.getInstance(activity)!!
         //startActivity(Intent(requireContext(),UserDetailActivity::class.java))
     }
 
@@ -73,19 +74,20 @@ class GalleryFragment : Fragment() {
     }
 
     private fun getUserDetailList() {
-        userDetailList.add(UserDetail("1", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("2", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("3", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("4", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("5", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("6", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("7", "Test", "03241234567", "Lahore"))
-        userDetailList.add(UserDetail("8", "Test", "03241234567", "Lahore"))
-
-        if (userDetailList.isEmpty().not()) {
-            userDetailAdapter.setUserDetail(userDetailList)
-            showUserDetailList()
-        }
+        UserDetailsTask(activity as AdminActivity,UserType.User.name).execute()
+//        userDetailList.add(UserDetail("1", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("2", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("3", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("4", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("5", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("6", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("7", "Test", "03241234567", "Lahore"))
+//        userDetailList.add(UserDetail("8", "Test", "03241234567", "Lahore"))
+//
+//        if (userDetailList.isEmpty().not()) {
+//            userDetailAdapter.setUserDetail(userDetailList)
+//            showUserDetailList()
+//        }
     }
 
     private fun showUserDetailList() {
@@ -106,5 +108,46 @@ class GalleryFragment : Fragment() {
             //
             // root.onBackPressed()
         }
+    }
+    @SuppressLint("StaticFieldLeak")
+    inner class UserDetailsTask internal constructor(context: AdminActivity?, email: String) :
+        AsyncTask<Void?, Void?, List<UserEntity>>() {
+        private val activityReference: WeakReference<AdminActivity>
+
+        // private lateinit var note: UserEntity
+        private lateinit var email: String
+
+
+        override fun onPostExecute(result: List<UserEntity>?) {
+            super.onPostExecute(result)
+            if (result?.isEmpty()!!.not()) {
+                userDetailAdapter.setUserDetail(result)
+                showUserDetailList()
+            }
+        }
+
+        init {
+            activityReference = WeakReference(context)
+            // this.note =note
+            this.email = email
+        }
+
+        override fun doInBackground(vararg params: Void?): List<UserEntity> {
+            var  entity: List<UserEntity> = ArrayList()
+            try {
+                entity= activityReference.get()?.appDatabase?.userDao()?.findByUserType(email)!!
+
+
+            } catch (e: java.lang.Exception) {
+
+
+
+            }
+            finally {
+                return entity;
+            }
+
+        }
+
     }
 }

@@ -14,14 +14,16 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.fyp.database.mechanic.AppDatabase
 
 class AdminActivity : AppCompatActivity() {
-
+    lateinit var appDatabase: AppDatabase;
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
+        appDatabase = AppDatabase.getInstance(this@AdminActivity)!!
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

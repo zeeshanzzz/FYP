@@ -33,7 +33,7 @@ class MehanicBusinessActivity2 : AppCompatActivity() {
                 val temppmechWorkType=mechWorkType.editText?.text.toString()
                 val tempmechCity=mechCity.editText?.text.toString()
                 val tempmechLicense=mechLicense.editText?.text.toString()
-                val entity= MechanicEnity(0, temppmechName,temppmechEmaile,temppmechWorkType,tempmechCity,"Abc",tempmechLicense);
+                val entity= MechanicEnity(0, temppmechName,temppmechEmaile,temppmechWorkType,tempmechCity,"Abc",tempmechLicense,UserType.Pending.name);
                 InsertTask(this@MehanicBusinessActivity2,entity).execute()
             }
 

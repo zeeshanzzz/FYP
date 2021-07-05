@@ -3,7 +3,6 @@ package com.example.fyp.admin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.R
@@ -57,7 +56,7 @@ class ViewUserFeedbackActivity : AppCompatActivity() {
 
        if (feedList.isEmpty().not()){
            feedbackAdapter= ViewUserFeedbackAdapter()
-           feedbackAdapter.setFeedbackList(feedList)
+          // feedbackAdapter.setFeedbackList(feedList)
            showFeedbackList()
        }
     }

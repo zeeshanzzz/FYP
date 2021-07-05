@@ -12,6 +12,10 @@ interface UserDao {
     @Query("SELECT * FROM Users WHERE email LIKE :email")
     fun findByEmail(email: String): UserEntity
 
+    @Query("SELECT * FROM Users WHERE userType LIKE :userType")
+    fun findByUserType(userType: String): List<UserEntity>
+
+
     @Insert
     fun insertAll(vararg todo: UserEntity)
 

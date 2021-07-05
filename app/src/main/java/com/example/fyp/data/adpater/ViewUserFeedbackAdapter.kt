@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp.R
 import com.example.fyp.data.model.ViewUserFeedBack
+import com.example.fyp.database.mechanic.enity.MechanicFeedBackEntity
+import com.example.fyp.database.mechanic.enity.UserEntity
 
 class ViewUserFeedbackAdapter :RecyclerView.Adapter<ViewUserFeedbackAdapter.ViewUserFeedbackAdapterViewHolder>() {
 
-    private lateinit var feedbackList:ArrayList<ViewUserFeedBack>
+    private lateinit var feedbackList:ArrayList<MechanicFeedBackEntity>
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,8 +24,8 @@ class ViewUserFeedbackAdapter :RecyclerView.Adapter<ViewUserFeedbackAdapter.View
         return ViewUserFeedbackAdapterViewHolder(view)
     }
 
-    public fun setFeedbackList(feedbackList:ArrayList<ViewUserFeedBack>) {
-        this.feedbackList=feedbackList
+    public fun setFeedbackList(feedbackList: List<MechanicFeedBackEntity>?) {
+        this.feedbackList=feedbackList as ArrayList<MechanicFeedBackEntity>
     }
 
     override fun onBindViewHolder(holder: ViewUserFeedbackAdapterViewHolder, position: Int) {
@@ -32,8 +34,8 @@ class ViewUserFeedbackAdapter :RecyclerView.Adapter<ViewUserFeedbackAdapter.View
 
             var listItem = feedbackList.get(position)
 
-            holder.tv_ViewUserFeedBackId.text = listItem.id
-            holder.tv_ViewUserFeedBackName.text = listItem.name
+            holder.tv_ViewUserFeedBackId.text = listItem.id.toString()
+            holder.tv_ViewUserFeedBackName.text = listItem.user_name
             holder.tv_ViewUserFeedBackDate.text = listItem.date
             holder.tv_ViewUserFeedBack.text = listItem.feedback
 

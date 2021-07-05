@@ -1,5 +1,7 @@
 package com.example.fyp.ui.UserFeedBack
 
+import android.annotation.SuppressLint
+import android.os.AsyncTask
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,9 +10,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp.AdminActivity
 import com.example.fyp.R
 import com.example.fyp.data.adpater.ViewUserFeedbackAdapter
 import com.example.fyp.data.model.ViewUserFeedBack
+import com.example.fyp.database.mechanic.enity.MechanicFeedBackEntity
+import java.lang.ref.WeakReference
 
 
 class UserFeedbackFragment : Fragment() {
@@ -55,24 +60,25 @@ class UserFeedbackFragment : Fragment() {
 
     private fun getFeedbackList(){
 
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
-
-        if (feedList.isEmpty().not()){
-            feedbackAdapter= ViewUserFeedbackAdapter()
-            feedbackAdapter.setFeedbackList(feedList)
-            showFeedbackList()
-        }
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//        feedList.add(ViewUserFeedBack("1","Test","27/06/2021","Good one"))
+//
+//        if (feedList.isEmpty().not()){
+//            feedbackAdapter= ViewUserFeedbackAdapter()
+//            feedbackAdapter.setFeedbackList(feedList)
+//            showFeedbackList()
+//        }
+        UserDetailsTask(activity as AdminActivity).execute()
     }
 
     private fun showFeedbackList(){
@@ -92,5 +98,47 @@ class UserFeedbackFragment : Fragment() {
             onBackPressed()
         }*/
     }
+    @SuppressLint("StaticFieldLeak")
+    inner class UserDetailsTask internal constructor(context: AdminActivity?) :
+        AsyncTask<Void?, Void?, List<MechanicFeedBackEntity>>() {
+        private val activityReference: WeakReference<AdminActivity>
 
+        // private lateinit var note: UserEntity
+      //  private lateinit var email: String
+
+
+        override fun onPostExecute(result: List<MechanicFeedBackEntity>?) {
+            super.onPostExecute(result)
+            if (result?.isEmpty()!!.not()){
+            feedbackAdapter= ViewUserFeedbackAdapter()
+            feedbackAdapter.setFeedbackList(result)
+            showFeedbackList()
+        }
+
+        }
+
+        init {
+            activityReference = WeakReference(context)
+            // this.note =note
+           // this.email = email
+        }
+
+        override fun doInBackground(vararg params: Void?): List<MechanicFeedBackEntity> {
+            var  entity: List<MechanicFeedBackEntity> = ArrayList()
+            try {
+                entity= activityReference.get()?.appDatabase?.mechanicFeedbackDao()?.getAll()!!
+
+
+            } catch (e: java.lang.Exception) {
+
+
+
+            }
+            finally {
+                return entity;
+            }
+
+        }
+
+    }
 }
