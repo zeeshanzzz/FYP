@@ -141,7 +141,7 @@ class SlideshowFragment : Fragment() ,ItemClickListner {
     }
         @SuppressLint("StaticFieldLeak")
     inner class UserDetailsTask internal constructor(context: AdminActivity?,approve:String,email:String) :
-        AsyncTask<Void?, Void?,Void>() {
+        AsyncTask<Void?, Void?,String>() {
         private val activityReference: WeakReference<AdminActivity>
         private lateinit var approve:String
             private lateinit var email:String;
@@ -150,7 +150,7 @@ class SlideshowFragment : Fragment() ,ItemClickListner {
         // private lateinit var email: String
 
 
-            override fun onPostExecute(result: Void?) {
+            override fun onPostExecute(result: String?) {
                 super.onPostExecute(result)
             }
 
@@ -162,7 +162,7 @@ class SlideshowFragment : Fragment() ,ItemClickListner {
             // this.email = email
         }
 
-        override fun doInBackground(vararg params: Void?): Void? {
+        override fun doInBackground(vararg params: Void?): String? {
 
             try {
               activityReference.get()?.appDatabase?.mechanicDao()?.update(approve,email)!!
@@ -173,7 +173,7 @@ class SlideshowFragment : Fragment() ,ItemClickListner {
 
 
             }
-            return
+            return "void"
         }
 
     }
