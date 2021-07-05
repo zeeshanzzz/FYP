@@ -11,10 +11,7 @@ import android.widget.SearchView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp.AdminActivity
-import com.example.fyp.MechanicActivity
-import com.example.fyp.R
-import com.example.fyp.RegistratinActivity
+import com.example.fyp.*
 import com.example.fyp.data.adpater.UserFindServiceAdapter
 import com.example.fyp.data.model.UserFindServiceModal
 import com.example.fyp.database.mechanic.AppDatabase
@@ -211,13 +208,13 @@ class FindServiceActivity : AppCompatActivity() {
         )
 
         rc_userFindService.setHasFixedSize(true)
-
-        if (serviceList.isEmpty().not()) {
-
-            servicesAdapter.setUserServiceList(serviceList)
-            rc_userFindService.adapter = servicesAdapter
-
-        }
+        UserDetailsTask(this).execute()
+//        if (serviceList.isEmpty().not()) {
+//
+//            servicesAdapter.setUserServiceList(serviceList)
+//            rc_userFindService.adapter = servicesAdapter
+//
+//        }
 
     }
     //@SuppressLint("StaticFieldLeak")
@@ -269,31 +266,31 @@ class FindServiceActivity : AppCompatActivity() {
 //    }
     @SuppressLint("StaticFieldLeak")
     inner class UserDetailsTask internal constructor(context: FindServiceActivity?) :
-        AsyncTask<Void?, Void?, MechanicEnity>() {
+        AsyncTask<Void?, Void?, List<MechanicEnity>>() {
         private val activityReference: WeakReference<FindServiceActivity>
 
         // private lateinit var note: UserEntity
         private lateinit var email: String
-
-
-        override fun onPostExecute(result: MechanicEnity?) {
+        override fun onPostExecute(result: List<MechanicEnity>?) {
             super.onPostExecute(result)
-//            if (result?.isEmpty()!!.not()) {
-//                userDetailAdapter.setUserDetail(result)
-//                showUserDetailList()
-//            }
+            if (result?.isEmpty()?.not()!!) {
+
+                servicesAdapter.setUserServiceList(result as ArrayList<MechanicEnity>)
+                rc_userFindService.adapter = servicesAdapter
+
+            }
         }
+
 
         init {
             activityReference = WeakReference(context)
             // this.note =note
-            this.email = email
         }
 
-        override fun doInBackground(vararg params: Void?): MechanicEnity {
-            var  entity: MechanicEnity= MechanicEnity(0,"","","","","","","")
+        override fun doInBackground(vararg params: Void?): List<MechanicEnity> {
+            var  entity:List<MechanicEnity> = ArrayList<MechanicEnity>()
             try {
-                entity= activityReference.get()?.appDatabase?.mechanicDao()?.findByTitle(email)!!
+                entity= activityReference.get()?.appDatabase?.mechanicDao()?.findByTitle(UserType.Approve.name)!!
 
 
             } catch (e: java.lang.Exception) {

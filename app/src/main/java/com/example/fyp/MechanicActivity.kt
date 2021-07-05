@@ -25,7 +25,27 @@ class MechanicActivity : AppCompatActivity() {
             }
 
         })
+        btnDelete.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent= Intent(this@MechanicActivity,MechanicDeleteActivity::class.java)
+                startActivity(intent)
+            }
 
+        })
+        btnUpdate.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent= Intent(this@MechanicActivity,MechanicUpdateActivity2::class.java)
+                startActivity(intent)
+            }
+
+        })
+        btnView.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent= Intent(this@MechanicActivity,MechanicFeedBackActivity::class.java)
+                startActivity(intent)
+            }
+
+        })
 
 
     }

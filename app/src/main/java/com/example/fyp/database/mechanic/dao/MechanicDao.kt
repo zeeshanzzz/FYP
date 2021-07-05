@@ -9,7 +9,7 @@ interface MechanicDao {
     fun getAll(): List<MechanicEnity>
 
     @Query("SELECT * FROM mechanic_business WHERE approve_status LIKE :approve_status")
-    fun findByTitle(approve_status: String): MechanicEnity
+    fun findByTitle(approve_status: String): List<MechanicEnity>
 
     @Insert
     fun insertAll(vararg todo: MechanicEnity)
