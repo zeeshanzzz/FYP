@@ -13,6 +13,7 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp.database.mechanic.AppDatabase
 import com.example.fyp.database.mechanic.enity.UserEntity
+import com.example.fyp.ui.login.LoginActivity
 import com.example.fyp.user.UserMainActivity
 import com.google.android.material.textfield.TextInputLayout
 import java.lang.ref.WeakReference
@@ -29,6 +30,16 @@ class RegistratinActivity : AppCompatActivity() {
 
         try {
             appDatabase = AppDatabase.getInstance(this@RegistratinActivity)!!
+                                            val entity = UserEntity(
+                                    0,
+                                    "admin",
+                                    "admin123",
+                                    "1234567",
+                                    "Temp",
+                                    UserType.valueOf("Admin").toString()
+                                );
+                                InsertAdmin(this@RegistratinActivity, entity).execute()
+
             val username = findViewById<TextInputLayout>(R.id.username)
             val password = findViewById<TextInputLayout>(R.id.password)
             val Mobile = findViewById<TextInputLayout>(R.id.tvMobile)
@@ -107,17 +118,17 @@ class RegistratinActivity : AppCompatActivity() {
                                 );
                                 InsertTask(this@RegistratinActivity, entity).execute()
                             }
-                            R.id.radioAdmin -> {
-                                val entity = UserEntity(
-                                    0,
-                                    tempname,
-                                    temppassword,
-                                    tempMobile,
-                                    temptvCity,
-                                    UserType.valueOf("Admin").toString()
-                                );
-                                InsertTask(this@RegistratinActivity, entity).execute()
-                            }
+//                            R.id.radioAdmin -> {
+//                                val entity = UserEntity(
+//                                    0,
+//                                    tempname,
+//                                    temppassword,
+//                                    tempMobile,
+//                                    temptvCity,
+//                                    UserType.valueOf("Admin").toString()
+//                                );
+//                                InsertTask(this@RegistratinActivity, entity).execute()
+//                            }
                         }
 
                     } catch (e: Exception) {
@@ -144,20 +155,49 @@ class RegistratinActivity : AppCompatActivity() {
 
                 when (radioUserButton.id) {
                     R.id.radioUser -> {
-                        val intent = Intent(activityReference.get(), UserMainActivity::class.java)
+                        val intent = Intent(activityReference.get(), LoginActivity::class.java)
                         activityReference.get()?.startActivity(intent)
                     }
                     R.id.radioMechanic -> {
-                        val intent = Intent(activityReference.get(), MechanicActivity::class.java)
+                        val intent = Intent(activityReference.get(), LoginActivity::class.java)
                         activityReference.get()?.startActivity(intent)
                     }
-                    R.id.radioAdmin -> {
-                        val intent = Intent(activityReference.get(), AdminActivity::class.java)
-                        activityReference.get()?.startActivity(intent)
-                    }
+//                    R.id.radioAdmin -> {
+//                        val intent = Intent(activityReference.get(), AdminActivity::class.java)
+//                        activityReference.get()?.startActivity(intent)
+//                    }
                 }
             }
         }
+
+        init {
+            activityReference = WeakReference(context)
+            this.note = note
+        }
+
+        override fun doInBackground(vararg params: Void?): Boolean {
+            var isInserted: Boolean;
+            try {
+                activityReference.get()?.appDatabase?.userDao()?.insertAll(note);
+                isInserted = true;
+
+            } catch (e: Exception) {
+                isInserted = false;
+
+            }
+            return isInserted;
+        }
+
+    }
+    @SuppressLint("StaticFieldLeak")
+    inner class InsertAdmin internal constructor(context: RegistratinActivity?, note: UserEntity) :
+            AsyncTask<Void?, Void?, Boolean>() {
+        private val activityReference: WeakReference<RegistratinActivity>
+        private lateinit var note: UserEntity
+
+
+        // onPostExecute runs on main thread
+
 
         init {
             activityReference = WeakReference(context)

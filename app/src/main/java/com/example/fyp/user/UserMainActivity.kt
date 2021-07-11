@@ -7,11 +7,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.fyp.R
+import com.example.fyp.ui.login.LoginActivity
 
 class UserMainActivity : AppCompatActivity() {
 
     private lateinit var tv_userMainHome: TextView
-    private lateinit var tv_userMainLogOut: TextView
+    private lateinit var btn_Logout: Button
 
     private lateinit var btn_userFindService:Button
     private lateinit var btn_userMyProfile:Button
@@ -29,7 +30,7 @@ class UserMainActivity : AppCompatActivity() {
 
         tv_userMainHome = findViewById(R.id.tv_userMainHome);
         tv_userMainHome.visibility=View.GONE
-        tv_userMainLogOut = findViewById(R.id.tv_userMainLogOut);
+        btn_Logout = findViewById(R.id.btn_Logout);
 
         btn_userFindService = findViewById(R.id.btn_userFindService);
         btn_userMyProfile = findViewById(R.id.btn_userMyProfile);
@@ -41,8 +42,9 @@ class UserMainActivity : AppCompatActivity() {
 
         }
 
-        tv_userMainLogOut.setOnClickListener {
-
+        btn_Logout.setOnClickListener {
+            startActivity(Intent(this@UserMainActivity,LoginActivity::class.java))
+            finish()
         }
 
         btn_userFindService.setOnClickListener {

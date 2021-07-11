@@ -27,4 +27,9 @@
         android:name="com.example.fyp.ui.UserFeedBack.UserFeedbackFragment"
         android:label="FeedBack"
         tools:layout="@layout/activity_view_user_feedback" />
+    <activity
+        android:id="@+id/nav_logout"
+        android:name="com.example.fyp.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>
