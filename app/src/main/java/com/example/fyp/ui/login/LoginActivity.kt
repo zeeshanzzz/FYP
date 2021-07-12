@@ -21,7 +21,9 @@ class LoginActivity : AppCompatActivity() {
     private val radioUserGroup: RadioGroup? = null
     private lateinit var radioUserButton: RadioButton
     lateinit var appDatabase: AppDatabase;
-
+companion object{
+    @JvmStatic lateinit var userEmail: String
+}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     when (radioUserButton.id) {
                         R.id.radioUser -> {
+                            userEmail=tempname
                             LoginTask(this@LoginActivity, tempname).execute()
                         }
                         R.id.radioMechanic -> {
