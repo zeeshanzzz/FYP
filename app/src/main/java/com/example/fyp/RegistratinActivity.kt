@@ -6,10 +6,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp.database.mechanic.AppDatabase
 import com.example.fyp.database.mechanic.enity.UserEntity
@@ -29,26 +26,36 @@ class RegistratinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_registratin)
 
         try {
-            appDatabase = AppDatabase.getInstance(this@RegistratinActivity)!!
-                                            val entity = UserEntity(
-                                    0,
-                                    "admin",
-                                    "admin123",
-                                    "1234567",
-                                    "Temp",
-                                    UserType.valueOf("Admin").toString()
-                                );
-                                InsertAdmin(this@RegistratinActivity, entity).execute()
+//            appDatabase = AppDatabase.getInstance(this@RegistratinActivity)!!
+//                                            val entity = UserEntity(
+//                                    0,
+//                                    "admin",
+//                                    "admin123",
+//                                    "1234567",
+//                                    "Temp",
+//                                    UserType.valueOf("Admin").toString()
+//                                );
+//                                InsertAdmin(this@RegistratinActivity, entity).execute()
 
             val username = findViewById<TextInputLayout>(R.id.username)
             val password = findViewById<TextInputLayout>(R.id.password)
             val Mobile = findViewById<TextInputLayout>(R.id.tvMobile)
             val tvCity = findViewById<TextInputLayout>(R.id.tvCity)
+            val textView2=findViewById<TextView>(R.id.textView2)
             val et_confirmPassword = findViewById<TextInputLayout>(R.id.retryPassword)
 
             login = findViewById(R.id.loginRegister)
             val loading = findViewById<ProgressBar>(R.id.loading)
             val radioUserGroup = findViewById<RadioGroup>(R.id.radioGroup)
+            textView2.setOnClickListener(object :View.OnClickListener{
+
+                override fun onClick(v: View?) {
+                    val intent=Intent(this@RegistratinActivity,LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+            })
             login.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
 

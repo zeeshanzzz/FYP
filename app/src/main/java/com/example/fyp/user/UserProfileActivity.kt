@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.fyp.R
+import com.example.fyp.database.mechanic.AppDatabase
 
 class UserProfileActivity : AppCompatActivity() {
-
+    lateinit var appDatabase: AppDatabase;
     private lateinit var iv_userProfileBack:ImageView
 
     private lateinit var tv_userProfileName:TextView
@@ -19,7 +20,7 @@ class UserProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
-
+        appDatabase = AppDatabase.getInstance(this@UserProfileActivity)!!
         init()
         listener()
     }
