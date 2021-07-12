@@ -30,14 +30,14 @@
             android:name=".UserActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/Theme.FYP.NoActionBar" />
-        <activity
+        <!--<activity
             android:name=".MechanicMainActivity"
             android:label="@string/title_activity_mechanic_main"
             android:theme="@style/Theme.FYP.NoActionBar" />
         <activity
             android:name=".UserMainActivity"
             android:label="@string/title_activity_user_main"
-            android:theme="@style/Theme.FYP.NoActionBar" />
+            android:theme="@style/Theme.FYP.NoActionBar" />-->
         <activity
             android:name=".AdminActivity"
             android:label="@string/title_activity_admin"

@@ -73,6 +73,10 @@ class RegistratinActivity : AppCompatActivity() {
                             password.editText?.error = "Required"
                             return
                         }
+                        if (temppassword.length < 7) {
+                            password.editText?.error = "Length should be greater than 6 characters"
+                            return
+                        }
                         if (et_confirmPassword.editText?.text.toString().trim().isEmpty()!!) {
                             et_confirmPassword.editText?.error = "Required"
                             return
@@ -85,6 +89,13 @@ class RegistratinActivity : AppCompatActivity() {
                         }
                         if (tempMobile.isEmpty()) {
                             Mobile.editText?.error = "Required"
+                            return
+                        }
+                        if (android.util.Patterns.PHONE.matcher(
+                                        Mobile.editText?.text.toString().trim()
+                                ).matches().not()
+                        ) {
+                            Mobile.editText?.error = "Invalid Phone Number"
                             return
                         }
                         if (temptvCity.isEmpty()) {
