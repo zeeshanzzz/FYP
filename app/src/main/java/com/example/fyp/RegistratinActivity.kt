@@ -26,7 +26,7 @@ class RegistratinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_registratin)
 
         try {
-//            appDatabase = AppDatabase.getInstance(this@RegistratinActivity)!!
+ appDatabase = AppDatabase.getInstance(this@RegistratinActivity)!!
 //                                            val entity = UserEntity(
 //                                    0,
 //                                    "admin",
